@@ -8,3 +8,5 @@ etc/
 browserify-build.command
 browserify-build.bat
 app.js
+src/main/resources/META-INF/
+src/main/resources/app.js

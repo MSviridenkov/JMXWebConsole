@@ -3,6 +3,9 @@ import org.jolokia.jvmagent.JolokiaServer;
 import org.jolokia.jvmagent.JolokiaServerConfig;
 import org.jolokia.jvmagent.JvmAgentConfig;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
 
 public class JMXAgent {
@@ -15,7 +18,8 @@ public class JMXAgent {
             this.port = port;
             this.jolokiaHelpServer = HttpServer.create(new InetSocketAddress("localhost", port), 10);
 
-            this.jolokiaHelpServer.createContext("/", new JMXHandler("text/html", "index.html"));
+            this.jolokiaHelpServer.createContext("/app.js", new JMXHandler("text/javascript", getResource("/main/resources/app.js")));
+            this.jolokiaHelpServer.createContext("/", new JMXHandler("text/html", getResource("/main/resources/index.html")));
 
             JolokiaServerConfig serverConfig = new JvmAgentConfig("host=localhost,port=8778");
             this.jolokiaServer = new JolokiaServer(this.jolokiaHelpServer, serverConfig, false);
@@ -23,6 +27,21 @@ public class JMXAgent {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private String getResource(String path) {
+        BufferedReader streamReader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(path)));
+        StringBuilder resourceBuilder = new StringBuilder("");
+        String str;
+        try {
+            while((str = streamReader.readLine()) != null) {
+                resourceBuilder.append(str);
+                resourceBuilder.append('\n');
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return resourceBuilder.toString();
     }
 
     public void start() {
