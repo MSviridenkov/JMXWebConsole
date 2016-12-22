@@ -1,3 +1,10 @@
 .idea/
 *.iml
 target/
+out/
+node_modules/
+node/
+etc/
+browserify-build.command
+browserify-build.bat
+app.js
