@@ -18,8 +18,8 @@ public class JMXAgent {
             this.port = port;
             this.jolokiaHelpServer = HttpServer.create(new InetSocketAddress("localhost", port), 10);
 
-            this.jolokiaHelpServer.createContext("/app.js", new JMXHandler("text/javascript", getResource("/main/resources/app.js")));
-            this.jolokiaHelpServer.createContext("/", new JMXHandler("text/html", getResource("/main/resources/index.html")));
+            this.jolokiaHelpServer.createContext("/app.js", new JMXHandler("text/javascript", "app.js"));
+            this.jolokiaHelpServer.createContext("/", new JMXHandler("text/html", "index.html"));
 
             JolokiaServerConfig serverConfig = new JvmAgentConfig("host=localhost,port=8778");
             this.jolokiaServer = new JolokiaServer(this.jolokiaHelpServer, serverConfig, false);
@@ -30,6 +30,8 @@ public class JMXAgent {
     }
 
     private String getResource(String path) {
+        //InputStreamReader isr = new InputStreamReader(this.getClass().getResourceAsStream(path));
+        //System.out.println(isr == null);
         BufferedReader streamReader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(path)));
         StringBuilder resourceBuilder = new StringBuilder("");
         String str;

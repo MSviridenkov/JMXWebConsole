@@ -108,64 +108,64 @@ class Main extends React.Component {
     render() {
         decorators.Header = (props) => {
             var headerWithTip = <div>
-            <a data-tip data-for={props.node.fullName} style={styles.treeHeader}>
-            {props.node.name}
-        </a>
-            <ReactTooltip
-            id={props.node.fullName}
-            effect='solid'
-            type='light'
-            place='right'>
-                <p>{props.node.desc}</p>
-            </ReactTooltip>
+                <a data-tip data-for={props.node.fullName} style={styles.treeHeader}>
+                    {props.node.name}
+                </a>
+                <ReactTooltip
+                    id={props.node.fullName}
+                    effect='solid'
+                    type='light'
+                    place='right'>
+                    <p>{props.node.desc}</p>
+                </ReactTooltip>
             </div>;
             return <div style={styles.treeHeader}>
-            {(props.node.hasOwnProperty("desc")) ? headerWithTip : props.node.name}
-        </div>;
+                {(props.node.hasOwnProperty("desc")) ? headerWithTip : props.node.name}
+            </div>;
         };
         return (
             <StyleRoot>
-            <div style={styles.component}>
-    <div style={styles.searchBox}>
-    <div className="input-group">
-            <span className="input-group-addon">
-            <i className="fa fa-search"></i>
-            </span>
-            <input type="text"
-        className="form-control"
-        placeholder="Search..."
-        onKeyUp={this.onFilterMouseUp.bind(this)}
-    />
-    </div>
-        </div>
-        <Treebeard
-        data={this.state.data}
-        onToggle={this.onToggle}
-        decorators={decorators}
-            />
-            </div>
-            <div style={styles.component}>
-    <div style={styles.pollIntervalInput}>
-    <input
-        type="checkbox"
-        onChange={this.handleCheckboxChange}
-    />
-    <input
-        type="text"
-        defaultValue={DEFAULT_POLL_INTERVAL / 1000}
-        id="intervalInput"
-        //onChange={this.handleChange}
-        onKeyPress={this.handleKeyPress}
-    />
-    <button
-        onClick={this.handleClick}>
-        Refresh
-        </button>
-        </div>
-        <AttributesList node={this.state.cursor} pollInterval={this.state.pollInterval} shouldUpdate={this.state.shouldUpdate}/>
-    </div>
-        </StyleRoot>
-    );
+                <div style={styles.component}>
+                    <div style={styles.searchBox}>
+                        <div className="input-group">
+                        <span className="input-group-addon">
+                            <i className="fa fa-search"></i>
+                        </span>
+                        <input type="text"
+                            className="form-control"
+                            placeholder="Search..."
+                            onKeyUp={this.onFilterMouseUp.bind(this)}
+                        />
+                        </div>
+                    </div>
+                    <Treebeard
+                        data={this.state.data}
+                        onToggle={this.onToggle}
+                        decorators={decorators}
+                    />
+                </div>
+                <div style={styles.component}>
+                    <div style={styles.pollIntervalInput}>
+                        <input
+                            type="checkbox"
+                            onChange={this.handleCheckboxChange}
+                        />
+                        <input
+                            type="text"
+                            defaultValue={DEFAULT_POLL_INTERVAL / 1000}
+                            id="intervalInput"
+                            //onChange={this.handleChange}
+                            // onKeyPress={this.handleKeyPress}
+                            />
+                            <button
+                                onClick={this.handleClick}>
+                                Refresh
+                            </button>
+                    </div>
+                    <AttributesList node={this.state.cursor} pollInterval={this.state.pollInterval} shouldUpdate={this.state.shouldUpdate}/>
+                </div>
+            </StyleRoot>
+        );
     }
 }
 

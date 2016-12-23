@@ -18,8 +18,16 @@ class JMXHandler implements HttpHandler {
         h.set("Content-Type", contentType);
         t.sendResponseHeaders(200, 0);
         OutputStreamWriter os = new OutputStreamWriter(t.getResponseBody(), "UTF-8");
+        BufferedReader streamReader = new BufferedReader(new InputStreamReader(new FileInputStream(resource)));
+        StringBuilder resourceBuilder = new StringBuilder("");
+        String str;
 
-        os.write(resource.toString());
+        while((str = streamReader.readLine()) != null) {
+            resourceBuilder.append(str);
+            resourceBuilder.append('\n');
+        }
+
+        os.write(resourceBuilder.toString());
         os.close();
     }
 }
