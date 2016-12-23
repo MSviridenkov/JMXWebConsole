@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "browserify -t [ babelify --presets [ es2015 react ] ] src/main/js/index.js -o src/main/resources/app.js"
+    "build": "browserify -t [ babelify --presets [ es2015 react ] ] src/main/js/index.js -o app.js"
   },
   "author": "msviridenkov",
   "homepage": "https://github.com/MSviridenkov/JMXWebConsole",
